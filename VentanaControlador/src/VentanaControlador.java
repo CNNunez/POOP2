@@ -24,21 +24,22 @@ public class VentanaControlador{
 
     public void starter(){
         try{
+            System.out.println("in");
             serverSocket = new ServerSocket(7777);
             clientSocket = serverSocket.accept();
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             
             String msg = in.readLine();
-            System.out.println(msg);
+            System.out.println("msg: " + msg);
             
             if (msg.equals("getPistaG")) {
                 PistaGRequest(out);
             }
-            if (msg.equals("getPuertaM")) {
+            else if (msg.equals("getPuertaM")) {
                 PistaMRequest(out);
             }
-            if (msg.equals("getPuertaP")) {
+            else if (msg.equals("getPuertaP")) {
                 PistaPRequest(out);
             }
             else {

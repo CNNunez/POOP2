@@ -81,9 +81,12 @@ public class VentanaControladorCliente extends Thread{
     }
 
     public void getPista(){
-        if (ListaVuelos!=null){
+        System.out.println("**** get pista");
+        if (ListaVuelos.size()>0){
+            System.out.println("**** in if");
             if (ListaVuelos.get(0).Avion.Size.equals("pequeno")){
                 String response = sendMessage("getPistaP");
+                System.out.println("**** response: " + response);
                 if (!response.equals("")){
                     ListaVuelos.get(0).Pista = response;
                     ListaAterrizando.add(ListaAterrizando.size(), ListaVuelos.get(0));
@@ -92,6 +95,7 @@ public class VentanaControladorCliente extends Thread{
             }
             else if (ListaVuelos.get(0).Avion.Size.equals("mediano")){
                 String response = sendMessage("getPistaM");
+                System.out.println("**** response: " + response);
                 if (!response.equals("")){
                     ListaVuelos.get(0).Pista = response;
                     ListaAterrizando.add(ListaAterrizando.size(), ListaVuelos.get(0));
@@ -100,6 +104,7 @@ public class VentanaControladorCliente extends Thread{
             }
             else if (ListaVuelos.get(0).Avion.Size.equals("grande")){
                 String response = sendMessage("getPistaG");
+                System.out.println("**** response: " + response);
                 if (!response.equals("")){
                     ListaVuelos.get(0).Pista = response;
                     ListaAterrizando.add(ListaAterrizando.size(), ListaVuelos.get(0));

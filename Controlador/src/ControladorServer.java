@@ -26,7 +26,6 @@ public class ControladorServer extends Thread{
         ListaVuelos = new ArrayList<>();
         V = ControladorWindow;
         VentanaControladorCliente = new VentanaControladorCliente();
-        VentanaControladorCliente.start();
     }
 
     public void starter(int port) throws InterruptedException{
@@ -56,6 +55,7 @@ public class ControladorServer extends Thread{
         continuar = true;
         activo = true;
         System.out.println("Thread de controlador iniciado");
+        VentanaControladorCliente.start();
         try {
             // thread functionality
             while (activo){
