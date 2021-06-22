@@ -15,10 +15,12 @@ public class ControladorServer extends Thread{
     public boolean activo;
 
     ArrayList<vuelo> ListaVuelos;
+    VControlador V;
 
-    public ControladorServer(String name) {
+    public ControladorServer(String name, VControlador ControladorWindow) {
         super(name);
         ListaVuelos = new ArrayList<>();
+        V = ControladorWindow;
     }
 
     public void starter(int port) throws InterruptedException{
@@ -53,6 +55,7 @@ public class ControladorServer extends Thread{
                 starter(6666);
                 while (pausa){
                     System.out.println("Controlador en pausa");
+                    Thread.sleep(2000);
                 }
                 Thread.sleep(1000);
             }
@@ -69,22 +72,35 @@ public class ControladorServer extends Thread{
         out.println("OK");
         String[] datos = msg.trim().split(";");
 
-        if (datos[0].equals("classcarga")){
+        if (datos[0].equals("class carga")){
             avion newCarga = new carga(datos[1], datos[2]);
             vuelo newVuelo = new vuelo(newCarga,"","");
             ListaVuelos.add(ListaVuelos.size(), newVuelo);
+            printData(ListaVuelos.size()-1);
         }
-        else if (datos[0].equals("classpasajeros")){
+        else if (datos[0].equals("class pasajeros")){
             avion newPasajeros = new pasajeros(datos[1], datos[2]);
             vuelo newVuelo = new vuelo(newPasajeros,"","");
             ListaVuelos.add(ListaVuelos.size(), newVuelo);
+            printData(ListaVuelos.size()-1);
         }
-        else if (datos[0].equals("classprivado")){
+        else if (datos[0].equals("class privado")){
             avion newPrivado = new privado(datos[1], datos[2]);
             vuelo newVuelo = new vuelo(newPrivado,"","");
             ListaVuelos.add(ListaVuelos.size(), newVuelo);
+            printData(ListaVuelos.size()-1);
         }
         else{System.out.println("ERROR: no se reconoce la clase del avion.");}
     }
 
+    public void printData(int index){
+        String data = "";
+        data = data + ListaVuelos.get(index).Avion.getClass() + ";";
+        data = data + ListaVuelos.get(index).getSize() + ";";
+        data = data + ListaVuelos.get(index).getCondicion() + ";";
+        data = data + ListaVuelos.get(index).getPista() + ";";
+        data = data + ListaVuelos.get(index).getPuerta() + ";";
+        data = data + "\n";
+        V.textAreaControlador.append(data);
+    }
 }

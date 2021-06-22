@@ -7,6 +7,11 @@ public class VuelosCliente {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
+    VVuelos V;
+
+    VuelosCliente(VVuelos newVuelosWindow){
+        V = newVuelosWindow;
+    }
 
     public void startConnection(String ip, int port) {
         try{
@@ -23,11 +28,12 @@ public class VuelosCliente {
             clientSocket.close();
         }catch(Exception e){System.out.println("ERROR: " + e);}
     }
-    
+
     public String sendMessage(String msg) {
         try{
             startConnection("127.0.0.1", 6666);
             out.println(msg);
+            V.textAreaControlador.append(msg + "\n");
             String resp = in.readLine();
             stopConnection();
             return resp;

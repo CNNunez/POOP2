@@ -30,11 +30,19 @@ public class vuelo{
         return Pista;
     }
 
+    String getPuerta(){
+        return Pista;
+    }
+
     void setCondicion(String newCondition){
         Avion.setCondicion(newCondition);
     }
 
     void setPista(String newPista){
+        Pista = newPista;
+    }
+
+    void setPuerta(String newPista){
         Pista = newPista;
     }
 

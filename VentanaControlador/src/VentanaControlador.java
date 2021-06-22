@@ -9,9 +9,16 @@ public class VentanaControlador{
     public PrintWriter out;
     public BufferedReader in;
 
-    public boolean pausa;
-    public boolean continuar;
-    public boolean activo;
+    public String[] Pistas;
+    public String[] Puertas;
+
+    VentanaControlador(){
+        String listaPistas = "G-1,G-2,G-3,G-4,G-5,M-1,M-2,M-3,M-4,M-5,P-1,P-2,P-1¿3,P-4,P-5";
+        Pistas = listaPistas.split(",");
+
+        String listaPuertas = "p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20";
+        Puertas = listaPuertas.split(",");
+    }
 
     public void starter(){
         try{

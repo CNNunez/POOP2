@@ -1,6 +1,7 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        VuelosCliente client = new VuelosCliente();
+        VVuelos VuelosWindow = new VVuelos();
+        VuelosCliente client = new VuelosCliente(VuelosWindow);
         generarVuelos ListaVuelos = new generarVuelos();
         ListaVuelos.getVuelos();
         System.out.println("Los vuelos generados son: ");
