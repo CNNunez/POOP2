@@ -27,7 +27,7 @@ public class VentanaControladorCliente extends Thread{
             clientSocket.close();
         }catch(Exception e){System.out.println("ERROR: " + e);}
     }
-    
+
     public String sendMessage(String msg) {
         try{
             startConnection("127.0.0.1", 7777);
@@ -46,7 +46,7 @@ public class VentanaControladorCliente extends Thread{
         pausa = false;
         continuar = true;
         activo = true;
-        System.out.println("Thread de controlador iniciado");
+        System.out.println("Thread de VentanaControlador iniciado");
         try {
             // thread functionality
             while (activo){

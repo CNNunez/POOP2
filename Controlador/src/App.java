@@ -7,5 +7,8 @@ public class App {
 
         VentanaControladorCliente VentanaControladorCliente = new VentanaControladorCliente();
         VentanaControladorCliente.start();
+
+        VentanaInformacionCliente VentanaInformacionCliente = new VentanaInformacionCliente();
+        VentanaInformacionCliente.start();
     }
 }

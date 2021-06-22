@@ -3,7 +3,7 @@ import java.io.*;
 import java.net.*;
 
 // CLASS
-public class VentanaControlador{
+public class VentanaInformacion {
     public ServerSocket serverSocket;
     public Socket clientSocket;
     public PrintWriter out;
@@ -15,7 +15,7 @@ public class VentanaControlador{
 
     public void starter(){
         try{
-            serverSocket = new ServerSocket(7777);
+            serverSocket = new ServerSocket(8888);
             clientSocket = serverSocket.accept();
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -23,7 +23,7 @@ public class VentanaControlador{
             String msg = in.readLine();
             System.out.println(msg);
             
-            if (msg.equals("Hola VentanaControlador soy ControladorServer")) {
+            if (msg.equals("Hola VentanaInformacion soy ControladorServer")) {
                 ControladorServerRequest(out);
             }
             else {
@@ -42,6 +42,6 @@ public class VentanaControlador{
 
     // metodos de request
     public void ControladorServerRequest(PrintWriter out){
-        out.println("Hola controladorServer soy VentanaControlador");
+        out.println("Hola ControladorServer soy VentanaInformacion");
     }
 }

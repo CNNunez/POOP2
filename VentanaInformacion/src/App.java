@@ -1,8 +1,8 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        VentanaControlador VentanaControlador = new VentanaControlador();
+        VentanaInformacion VentanaInformacion = new VentanaInformacion();
         while (true){
-            VentanaControlador.starter();
+            VentanaInformacion.starter();
         }
     }
 }

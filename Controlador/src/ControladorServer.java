@@ -1,6 +1,7 @@
 // IMPORTS
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 // CLASS
 public class ControladorServer extends Thread{
@@ -13,8 +14,11 @@ public class ControladorServer extends Thread{
     public boolean continuar;
     public boolean activo;
 
+    ArrayList<vuelo> ListaVuelos;
+
     public ControladorServer(String name) {
         super(name);
+        ListaVuelos = new ArrayList<>();
     }
 
     public void starter(int port) throws InterruptedException{
@@ -26,13 +30,7 @@ public class ControladorServer extends Thread{
             
             String msg = in.readLine();
             System.out.println(msg);
-            
-            if (msg.equals("Hola controlador soy vuelos")) {
-                VuelosRequest(out);
-            }
-            else {
-                out.println("unrecognised info");
-            }
+            VuelosRequest(out, msg);
 
             in.close();
             out.close();
@@ -67,9 +65,26 @@ public class ControladorServer extends Thread{
 
 
     // metodos de request
-    public void VuelosRequest(PrintWriter out) throws InterruptedException{
-        out.println("hello vuelos soy controladorServer");
-        Thread.sleep(10000);
+    public void VuelosRequest(PrintWriter out, String msg) throws InterruptedException{
+        out.println("OK");
+        String[] datos = msg.trim().split(";");
+
+        if (datos[0].equals("classcarga")){
+            avion newCarga = new carga(datos[1], datos[2]);
+            vuelo newVuelo = new vuelo(newCarga,"","");
+            ListaVuelos.add(ListaVuelos.size(), newVuelo);
+        }
+        else if (datos[0].equals("classpasajeros")){
+            avion newPasajeros = new pasajeros(datos[1], datos[2]);
+            vuelo newVuelo = new vuelo(newPasajeros,"","");
+            ListaVuelos.add(ListaVuelos.size(), newVuelo);
+        }
+        else if (datos[0].equals("classprivado")){
+            avion newPrivado = new privado(datos[1], datos[2]);
+            vuelo newVuelo = new vuelo(newPrivado,"","");
+            ListaVuelos.add(ListaVuelos.size(), newVuelo);
+        }
+        else{System.out.println("ERROR: no se reconoce la clase del avion.");}
     }
 
 }
