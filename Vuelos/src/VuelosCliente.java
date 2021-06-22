@@ -3,7 +3,7 @@ import java.io.*;
 import java.net.*;
 
 // CLASS
-public class Vuelos {
+public class VuelosCliente {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -23,7 +23,7 @@ public class Vuelos {
             return resp;
         }catch(Exception e){
             System.out.println("ERROR: " + e);
-            return "";
+            return "se dio un error";
         }
     }
 

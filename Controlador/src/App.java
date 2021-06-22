@@ -1,6 +1,11 @@
+import org.graalvm.compiler.phases.verify.VerifyInstanceOfUsage;
+
 public class App {
     public static void main(String[] args) {
-        Controlador server = new Controlador();
-        server.start(6666);
+        ControladorServer ControladorServer = new ControladorServer("Thread_Controlador");
+        ControladorServer.start();
+
+        VentanaControladorCliente VentanaControladorCliente = new VentanaControladorCliente();
+        VentanaControladorCliente.start();
     }
 }
