@@ -35,7 +35,9 @@ public class VuelosCliente {
             out.println(msg);
             V.textAreaControlador.append(msg + "\n");
             String resp = in.readLine();
-            stopConnection();
+            in.close();
+            out.close();
+            clientSocket.close();
             return resp;
         }catch(Exception e){
             System.out.println("ERROR: " + e);

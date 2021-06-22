@@ -9,12 +9,9 @@ public class App {
             System.out.println(ListaVuelos.getData(i));
         }
 
-        while (true){
-            String response = client.sendMessage(ListaVuelos.getData(0));
+        for (int i=0; i<15; i++){
+            String response = client.sendMessage(ListaVuelos.getData(i));
             System.out.println(response);
-            if (response.equals("OK")){
-                ListaVuelos.delete(0);
-            }
             
         }
     }

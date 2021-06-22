@@ -1,6 +1,7 @@
 // IMPORTS
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 // CLASS
 public class VentanaControlador{
@@ -9,15 +10,16 @@ public class VentanaControlador{
     public PrintWriter out;
     public BufferedReader in;
 
-    public String[] Pistas;
-    public String[] Puertas;
+    ArrayList<String> Pistas;
+    ArrayList<String> Puertas;
 
     VentanaControlador(){
         String listaPistas = "G-1,G-2,G-3,G-4,G-5,M-1,M-2,M-3,M-4,M-5,P-1,P-2,P-1¿3,P-4,P-5";
-        Pistas = listaPistas.split(",");
+        Pistas = new ArrayList<String>(Arrays.asList(listaPistas.split(",")));
 
         String listaPuertas = "p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20";
-        Puertas = listaPuertas.split(",");
+        Puertas = new ArrayList<String>(Arrays.asList(listaPuertas.split(",")));
+        
     }
 
     public void starter(){
@@ -30,11 +32,23 @@ public class VentanaControlador{
             String msg = in.readLine();
             System.out.println(msg);
             
-            if (msg.equals("Hola VentanaControlador soy ControladorServer")) {
-                ControladorServerRequest(out);
+            if (msg.equals("getPistaG")) {
+                PistaGRequest(out);
+            }
+            if (msg.equals("getPuertaM")) {
+                PistaMRequest(out);
+            }
+            if (msg.equals("getPuertaP")) {
+                PistaPRequest(out);
             }
             else {
-                out.println("unrecognised info");
+                if (msg.contains("-")){
+                    Pistas.add(msg);
+                }
+                else {
+                    Puertas.add(msg);
+                }
+                out.println("");
             }
             
             in.close();
@@ -48,7 +62,47 @@ public class VentanaControlador{
 
 
     // metodos de request
-    public void ControladorServerRequest(PrintWriter out){
-        out.println("Hola controladorServer soy VentanaControlador");
+    public void PistaGRequest(PrintWriter out){
+        boolean send = false;
+        for (int i=0; i<Pistas.size(); i++){
+            if (Pistas.get(0).contains("G")){
+                out.println(Pistas.get(0));
+                Pistas.remove(0);
+                send = true;
+            }
+        }
+        if (!send){
+            out.println("");
+        }
+    }
+    public void PistaMRequest(PrintWriter out){
+        boolean send = false;
+        for (int i=0; i<Pistas.size(); i++){
+            if (Pistas.get(0).contains("M")){
+                out.println(Pistas.get(0));
+                Pistas.remove(0);
+                send = true;
+            }
+        }
+        if (!send){
+            out.println("");
+        }
+    }
+    public void PistaPRequest(PrintWriter out){
+        boolean send = false;
+        for (int i=0; i<Pistas.size(); i++){
+            if (Pistas.get(0).contains("P")){
+                out.println(Pistas.get(0));
+                Pistas.remove(0);
+                send = true;
+            }
+        }
+        if (!send){
+            out.println("");
+        }
+    }
+    public void PuertaRequest(PrintWriter out){
+        out.println(Puertas.get(0));
+        Puertas.remove(0);
     }
 }

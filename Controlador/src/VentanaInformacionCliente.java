@@ -36,7 +36,7 @@ public class VentanaInformacionCliente extends Thread{
             stopConnection();
             return resp;
         }catch(Exception e){
-            System.out.println("ERROR: " + e);
+            System.out.println("ERROR 8888: " + e);
             return "se dio un error";
         }
     }

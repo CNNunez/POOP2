@@ -17,7 +17,7 @@ public class generarVuelos {
         ListaCondition.add(0,"atiempo");
         ListaCondition.add(1,"retraso");
 
-        cantVuelos = 30;
+        cantVuelos = 15;
     }
 
     public ArrayList<vuelo> getVuelos(){

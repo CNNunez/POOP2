@@ -15,12 +15,18 @@ public class ControladorServer extends Thread{
     public boolean activo;
 
     ArrayList<vuelo> ListaVuelos;
+    //ArrayList<vuelo> ListaAterrizando;
+    ArrayList<vuelo> ListaMoving;
+    ArrayList<vuelo> ListaPuerta;
     VControlador V;
+    VentanaControladorCliente VentanaControladorCliente;
 
     public ControladorServer(String name, VControlador ControladorWindow) {
         super(name);
         ListaVuelos = new ArrayList<>();
         V = ControladorWindow;
+        VentanaControladorCliente = new VentanaControladorCliente();
+        VentanaControladorCliente.start();
     }
 
     public void starter(int port) throws InterruptedException{
@@ -32,14 +38,15 @@ public class ControladorServer extends Thread{
             
             String msg = in.readLine();
             System.out.println(msg);
-            VuelosRequest(out, msg);
 
             in.close();
             out.close();
             clientSocket.close();
             serverSocket.close();
 
-        }catch(Exception e){System.out.println("ERROR: " + e);}
+            VuelosRequest(out, msg);
+
+        }catch(Exception e){System.out.println("ERROR" + port + ": " + e);}
         
     }
 
@@ -77,18 +84,21 @@ public class ControladorServer extends Thread{
             vuelo newVuelo = new vuelo(newCarga,"","");
             ListaVuelos.add(ListaVuelos.size(), newVuelo);
             printData(ListaVuelos.size()-1);
+            VentanaControladorCliente.addToListaVuelos(ListaVuelos.size(), newVuelo);
         }
         else if (datos[0].equals("class pasajeros")){
             avion newPasajeros = new pasajeros(datos[1], datos[2]);
             vuelo newVuelo = new vuelo(newPasajeros,"","");
             ListaVuelos.add(ListaVuelos.size(), newVuelo);
             printData(ListaVuelos.size()-1);
+            VentanaControladorCliente.addToListaVuelos(ListaVuelos.size(), newVuelo);
         }
         else if (datos[0].equals("class privado")){
             avion newPrivado = new privado(datos[1], datos[2]);
             vuelo newVuelo = new vuelo(newPrivado,"","");
             ListaVuelos.add(ListaVuelos.size(), newVuelo);
             printData(ListaVuelos.size()-1);
+            VentanaControladorCliente.addToListaVuelos(ListaVuelos.size(), newVuelo);
         }
         else{System.out.println("ERROR: no se reconoce la clase del avion.");}
     }
@@ -103,4 +113,6 @@ public class ControladorServer extends Thread{
         data = data + "\n";
         V.textAreaControlador.append(data);
     }
+
+    
 }
